@@ -215,3 +215,16 @@ func newMessage(r *bufio.Reader, autoParse bool) (*Message, error) {
 
 	return &msg, nil
 }
+
+func (m *Message) MAP() (resp map[string]string) {
+        resp = make(map[string]string)
+        //var keys []string
+
+        for key, value := range m.Headers {
+                strKey := fmt.Sprintf("%v", key)
+                strValue := fmt.Sprintf("%v", value)
+                resp[strKey] = strValue
+        }
+        resp["BODY"] = string(m.Body)
+        return
+}
